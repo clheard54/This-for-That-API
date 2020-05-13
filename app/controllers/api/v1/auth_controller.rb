@@ -1,7 +1,7 @@
 class Api::V1::AuthController < ApplicationController
 
     def create
-        @user = User.find_by(id: user_login_params[:id])
+        @user = User.find_by(username: user_login_params[:username])
         @serialized = UserSerializer.new(@user)
         if @user && @user.authenticate(user_login_params[:password])
             @token = encode_token(@user)
@@ -11,8 +11,10 @@ class Api::V1::AuthController < ApplicationController
         end
     end
 
+
     def show
         @user = current_user
+        # user = User.find_by(id: user_id)
         if logged_in?
             render json: {id: @user.id, username: @user.username}
         else
@@ -22,6 +24,6 @@ class Api::V1::AuthController < ApplicationController
 
     private
     def user_login_params
-        params.require(:user).permit(:first_name, :last_name, :username, :password, :email, :location)
+        params.require(:user).permit(:username, :password)
     end
 end
