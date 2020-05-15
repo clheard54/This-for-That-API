@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_194918) do
+ActiveRecord::Schema.define(version: 2020_05_15_195453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,10 +18,9 @@ ActiveRecord::Schema.define(version: 2020_05_15_194918) do
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
     t.string "offering_type"
-    t.bigint "offering_id"
+    t.integer "offering_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["offering_type", "offering_id"], name: "index_favorites_on_offering_type_and_offering_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -38,7 +37,8 @@ ActiveRecord::Schema.define(version: 2020_05_15_194918) do
   create_table "messages", force: :cascade do |t|
     t.integer "user_id"
     t.string "recipient"
-    t.string "item"
+    t.string "offering_type"
+    t.integer "offering_id"
     t.string "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -50,6 +50,20 @@ ActiveRecord::Schema.define(version: 2020_05_15_194918) do
     t.string "location"
     t.float "value"
     t.string "seeking"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tags_offerings", force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "offering_id"
+    t.string "offering_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
