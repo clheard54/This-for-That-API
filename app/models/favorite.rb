@@ -1,4 +1,4 @@
 class Favorite < ApplicationRecord
     belongs_to :user
-    belongs_to :item
+    belongs_to :offering, polymorphic:true
 end

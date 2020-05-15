@@ -1,12 +1,11 @@
-class CreateItems < ActiveRecord::Migration[6.0]
+class CreateServices < ActiveRecord::Migration[6.0]
   def change
-    create_table :items do |t|
-      t.integer :user_id
+    create_table :services do |t|
       t.string :title
       t.string :description
       t.string :location
-      t.string :seeking
       t.float :value
+      t.string :seeking
 
       t.timestamps
     end

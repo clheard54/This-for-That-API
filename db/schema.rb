@@ -10,23 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_161500) do
+ActiveRecord::Schema.define(version: 2020_05_15_194918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "item_id"
+    t.string "offering_type"
+    t.bigint "offering_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["offering_type", "offering_id"], name: "index_favorites_on_offering_type_and_offering_id"
   end
 
   create_table "items", force: :cascade do |t|
     t.integer "user_id"
-    t.string "name"
+    t.string "title"
     t.string "description"
     t.string "location"
+    t.string "seeking"
     t.float "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -37,6 +40,16 @@ ActiveRecord::Schema.define(version: 2020_05_12_161500) do
     t.string "recipient"
     t.string "item"
     t.string "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.string "location"
+    t.float "value"
+    t.string "seeking"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
