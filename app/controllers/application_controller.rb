@@ -1,24 +1,24 @@
 class ApplicationController < ActionController::API
 
-    def encode_token(user)
+    def encode_userToken(user)
         JWT.encode( {user_id: user.id, username: user.username}, 'uHave-iWant', 'HS256')
     end
 
-    def decoded_token
+    def decoded_userToken
         begin
-            JWT.decode(token, 'uHave-iWant', true, algorithm: 'HS256')
+            JWT.decode(userToken, 'uHave-iWant', true, algorithm: 'HS256')
         rescue
             JWT::DecodeError
-            [{error: "Invalid Token"}]
+            [{error: "Invalid userToken"}]
         end
     end
 
-    def token
+    def userToken
         request.headers['Authorization']
     end
 
     def user_id
-        decoded_token.first['user_id']
+        decoded_userToken.first['user_id']
     end
 
     def authorized

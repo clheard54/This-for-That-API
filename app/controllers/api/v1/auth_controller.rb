@@ -4,8 +4,8 @@ class Api::V1::AuthController < ApplicationController
         @user = User.find_by(username: user_login_params[:username])
         @serialized = UserSerializer.new(@user)
         if @user && @user.authenticate(user_login_params[:password])
-            @token = encode_token(@user)
-            render json: { user: @serialized, jwt: @token }
+            @userToken = encode_userToken(@user)
+            render json: { user: @serialized, jwt: @userToken }
         else
             render json: { error: 'Invalid username or password' }, status: :unauthorized
         end

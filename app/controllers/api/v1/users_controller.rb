@@ -10,10 +10,10 @@ class Api::V1::UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.valid?
             @user.save
-            @token = encode_token(@user)
+            @userToken = encode_userToken(@user)
             byebug
-            render json: { user: UserSerializer.new(@user), jwt: @token }
-                #use encode_token method to do JWT.encode (AppController)
+            render json: { user: UserSerializer.new(@user), jwt: @userToken }
+                #use encode_userToken method to do JWT.encode (AppController)
         else
             render json: { error: 'Failed to create new user account' }, status: :not_acceptable
         end
