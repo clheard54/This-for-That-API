@@ -1,8 +1,8 @@
-class Api::V1::ItemsController < ApplicationController
+class Api::V1::ServicesController < ApplicationController
     before_action :authorize, except: :index
 
-    def item_params
-        params.require(:item).permit(
+    def service_params
+        params.require(:service).permit(
           [
             :user_id,
             :title,

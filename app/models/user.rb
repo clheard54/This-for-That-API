@@ -7,6 +7,7 @@ class User < ApplicationRecord
     has_many :favorites
     has_many :messages
     accepts_nested_attributes_for :items
+    accepts_nested_attributes_for :services
     accepts_nested_attributes_for :favorites
     accepts_nested_attributes_for :messages
 end
