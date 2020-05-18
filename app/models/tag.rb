@@ -1,3 +1,3 @@
 class Tag < ApplicationRecord
-    belongs_to :tags_offerings
+    belongs_to :tags_offering
 end

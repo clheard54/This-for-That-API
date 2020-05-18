@@ -4,6 +4,7 @@ class User < ApplicationRecord
     validates :password, presence: true
 
     has_many :items
+    has_many :services
     has_many :favorites
     has_many :messages
     accepts_nested_attributes_for :items

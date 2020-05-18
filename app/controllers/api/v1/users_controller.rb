@@ -19,6 +19,22 @@ class Api::V1::UsersController < ApplicationController
         end
     end
     
+    def update 
+        @user = User.find(params[:id])
+        @user.update(user_params)
+        render json: @user
+    end
+
+    def destroy
+        @user = User.find(params[:id])
+        if @user 
+            @user.destroy 
+            render json: {message: "User successfully deleted"}
+        else 
+            render json: {message: 'Could not delete user'}, status: :not_acceptable
+        end
+    end
+    
     private
     def user_params
         params.require(:user).permit(:first_name, :last_name, :username, :password, :email, :location)

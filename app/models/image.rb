@@ -1,5 +1,5 @@
 class Image < ApplicationRecord
-    belongs_to :offering, inverse_of: :images
+    belongs_to :offering, :polymorphic => true, inverse_of: :images
     has_attached_file \
         :photo,
         styles: { thumb: ['32x32#', 'jpg'] },

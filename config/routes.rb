@@ -4,7 +4,10 @@ Rails.application.routes.draw do
       resources :users
       resources :favorites
       resources :items
+      resources :services
+      resources :tags
       resources :messages
+      resources :images
     post '/login', to: 'auth#create'
     get '/current_user', to: 'auth#show'
     post '/signup', to: 'users#create'
