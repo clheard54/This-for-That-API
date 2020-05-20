@@ -6,13 +6,13 @@ class Service < ApplicationRecord
     belongs_to :user
     has_many :images, :as => :offering
 
-    accepts_nested_attributes_for :images, allow_destroy: true
+    accepts_nested_attributes_for :images
     accepts_nested_attributes_for :tags
 
     def as_json(_opts = {})
     {
       id: id,
-      user_id: user_id
+      user_id: user_id,
       title: title,
       description: description,
       location: location,

@@ -1,5 +1,5 @@
 class Api::V1::FavoritesController < ApplicationController
-    before_action :authorize, except: :index
+    before_action :authorized, except: :index
 
     def index
         @favorites = Favorite.all
@@ -8,7 +8,7 @@ class Api::V1::FavoritesController < ApplicationController
 
     def create
         @favorite = Favorite.new(fave_params)
-        
+
     end
 
     def destroy

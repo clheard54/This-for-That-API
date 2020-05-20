@@ -1,5 +1,5 @@
 class Api::V1::ServicesController < ApplicationController
-    before_action :authorize, except: :index
+    before_action :authorized, except: :index
     
   def index
       @services = Service.all

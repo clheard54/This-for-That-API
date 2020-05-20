@@ -51,6 +51,8 @@ class Api::V1::ItemsController < ApplicationController
             :seeking,
             images_attributes: %I[
               id
+              name
+              url
               photo
               _destroy
             ]

@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-    before_action :authorize, except: [:create]
+    before_action :authorized, except: [:create]
 
     def profile
         puts UserSerializer.new(current_user)

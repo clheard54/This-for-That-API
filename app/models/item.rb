@@ -21,7 +21,7 @@ class Item < ApplicationRecord
       value: value,
       seeking: seeking,
       errors: errors,
-      image_photos: images.map do |x|
+      images: images.map do |x|
         {
           url: x.photo.url.absolute_url,
           name: x.photo_file_name,
