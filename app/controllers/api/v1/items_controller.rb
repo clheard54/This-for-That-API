@@ -2,7 +2,7 @@ class Api::V1::ItemsController < ApplicationController
     before_action :authorized, except: [:index, :create]
 
   def index
-      @items = Item.all
+      @items = Item.all.with_attached_images
       render json: @items
   end
 
@@ -16,7 +16,8 @@ class Api::V1::ItemsController < ApplicationController
       # byebug
       if @item.valid?
           @item.save
-          render json: { item: ItemSerializer.new(@item)}
+          item_serializer = ItemSerializer.new(item: @item)
+          render json: item_serializer.serialize_new_item()
       else
           render json: { error: 'Failed to submit item' }, status: :not_acceptable
       end
@@ -49,6 +50,7 @@ class Api::V1::ItemsController < ApplicationController
             :location,
             :value,
             :seeking,
+            :images,
             images_attributes: %I[
               id
               name
