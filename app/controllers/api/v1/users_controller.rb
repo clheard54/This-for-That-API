@@ -1,6 +1,11 @@
 class Api::V1::UsersController < ApplicationController
     before_action :authorized, except: [:create]
 
+    def index
+        @users = User.all
+        render json: @users
+    end
+    
     def profile
         puts UserSerializer.new(current_user)
         render json: {user: UserSerializer.new(current_user)}
