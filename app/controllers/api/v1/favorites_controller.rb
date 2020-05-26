@@ -8,10 +8,10 @@ class Api::V1::FavoritesController < ApplicationController
 
     def create
         @favorite = Favorite.new(fave_params)
-        byebug
+        # byebug
         if @favorite.valid?
             @favorite.save
-            render json: { favorite: FavoriteSerializer.new(@favorite)}
+            render json: { favorite: @favorite}
         else
             render json: { error: 'Failed to create favorite' }, status: :not_acceptable
         end
