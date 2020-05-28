@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :tags
       resources :messages
       resources :images
+      resources :tags_offerings
     post '/login', to: 'auth#create'
     get '/current_user', to: 'auth#show'
     post '/signup', to: 'users#create'

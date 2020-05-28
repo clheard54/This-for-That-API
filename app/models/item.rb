@@ -1,7 +1,6 @@
 class Item < ApplicationRecord
   include Rails.application.routes.url_helpers
 
-
     validates :title, presence: true
     validates :description, presence: true
     belongs_to :user
@@ -9,10 +8,9 @@ class Item < ApplicationRecord
     has_many :tags_offerings, :as => :offering
     has_many :messages, :as => :offering
     has_many :tags, through: :tags_offerings
-    has_many :images, :as => :offering
 
     accepts_nested_attributes_for :tags
-    has_many_attached :images
+    has_one_attached :image
 
     def as_json(_opts = {})
     {

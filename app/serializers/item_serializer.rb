@@ -1,7 +1,7 @@
 class ItemSerializer < ActiveModel::Serializer
     include Rails.application.routes.url_helpers
 
-    attributes :id, :title, :description, :user_id, :location, :value, :seeking, :tags, :images, :created_at
+    attributes :id, :title, :description, :user_id, :location, :value, :seeking, :tags, :image, :created_at
 
     def serialize_new_item()
         serialized_new_item = serialize_item(@item)
@@ -12,7 +12,7 @@ class ItemSerializer < ActiveModel::Serializer
     def image
         return unless object.image.attached?
       
-        object.images.blob.attributes
+        object.image.blob.attributes
             .slice('filename', 'byte_size')
             .merge(url: image_url)
             .tap { |attrs| attrs['name'] = attrs.delete('filename') }
@@ -38,3 +38,4 @@ class ItemSerializer < ActiveModel::Serializer
         }
       end
 end
+

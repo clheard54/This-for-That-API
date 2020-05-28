@@ -2,7 +2,7 @@ class Api::V1::ItemsController < ApplicationController
     before_action :authorized, except: [:index, :create]
 
   def index
-      @items = Item.all.with_attached_images
+      @items = Item.all.with_attached_image
       render json: @items
   end
 
@@ -12,10 +12,11 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
+    byebug
       @item = Item.new(item_params)
-      # byebug
       if @item.valid?
           @item.save
+          Cloudinary::Uploader.upload(item_params[:image])
           item_serializer = ItemSerializer.new(item: @item)
           render json: item_serializer.serialize_new_item()
       else
@@ -44,20 +45,14 @@ class Api::V1::ItemsController < ApplicationController
     def item_params
         params.require(:item).permit(
           [
+            :item,
             :user_id,
             :title,
             :description,
             :location,
             :value,
             :seeking,
-            :images,
-            images_attributes: %I[
-              id
-              name
-              url
-              photo
-              _destroy
-            ]
+            :image
           ]
         )
       end
