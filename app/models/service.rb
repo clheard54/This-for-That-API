@@ -6,7 +6,7 @@ class Service < ApplicationRecord
     belongs_to :user
     has_many :images, :as => :offering
 
-    accepts_nested_attributes_for :images
+    has_one_attached :image
     accepts_nested_attributes_for :tags
 
     def as_json(_opts = {})
@@ -28,4 +28,9 @@ class Service < ApplicationRecord
       end
     }
   end
+
+  def get_image_url
+    url_for(self.image)
+  end
+  
 end

@@ -12,13 +12,15 @@ class Api::V1::ServicesController < ApplicationController
   end
 
   def create
-      @service = Service.new(service_params)
-      if @service.valid?
-          @service.save
-          render json: { service: ServiceSerializer.new(@service)}
-      else
-          render json: { error: 'Failed to submit posting' }, status: :not_acceptable
-      end
+    @service = service.new(service_params)
+    if @service.valid?
+        @service.save
+        Cloudinary::Uploader.upload(service_params[:image])
+        service_serializer = serviceSerializer.new(service: @service)
+        render json: service_serializer.serialize_new_service()
+    else
+        render json: { error: 'Failed to submit item' }, status: :not_acceptable
+    end
   end
 
   def update 
@@ -39,21 +41,19 @@ class Api::V1::ServicesController < ApplicationController
 
   private
   
-    def service_params
-        params.require(:service).permit(
-          [
-            :user_id,
-            :title,
-            :description,
-            :location,
-            :value,
-            :seeking,
-            images_attributes: %I[
-              id
-              photo
-              _destroy
-            ]
-          ]
-        )
-      end
+  def service_params
+    params.require(:item).permit(
+      [
+        :item,
+        :user_id,
+        :title,
+        :description,
+        :location,
+        :value,
+        :seeking,
+        :image
+      ]
+    )
+  end
+  
 end

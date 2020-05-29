@@ -50,4 +50,3 @@ random_offering_id = rand(1..10)
 Message.create(user_id: 1, recipient: User.find(2), message: "Hi there", offering_type: 'item', offering_id: 1)
 Message.create(user_id: random_user_id, recipient: User.find(random_user_id), message: "Hi there", offering_type: 'item', offering_id: random_offering_id)
 
-

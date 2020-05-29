@@ -8,7 +8,6 @@ class Api::V1::FavoritesController < ApplicationController
 
     def create
         @favorite = Favorite.new(fave_params)
-        # byebug
         if @favorite.valid?
             @favorite.save
             render json: { favorite: @favorite}
@@ -20,7 +19,7 @@ class Api::V1::FavoritesController < ApplicationController
     def destroy
         @favorite = Favorite.find(params[:id])
         if @favorite 
-            @favorite.destroy 
+            @favorite.delete 
             render json: {message: "Favorited status successfully deleted"}
         else 
             render json: {message: 'Could not delete favorite'}, status: :not_acceptable
