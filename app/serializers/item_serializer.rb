@@ -1,7 +1,7 @@
 class ItemSerializer < ActiveModel::Serializer
     include Rails.application.routes.url_helpers
 
-    attributes :id, :title, :description, :user_id, :location, :value, :seeking, :tags, :image, :created_at
+    attributes :id, :title, :type, :description, :user_id, :location, :value, :seeking, :tags, :image, :created_at
 
     def serialize_new_item()
         serialized_new_item = serialize_item(@item)

@@ -11,7 +11,7 @@ class Item < ApplicationRecord
 
     accepts_nested_attributes_for :tags
     has_one_attached :image
-
+    
   #   def as_json(_opts = {})
   #   {
   #     id: id,

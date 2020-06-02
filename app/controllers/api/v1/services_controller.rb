@@ -44,7 +44,7 @@ class Api::V1::ServicesController < ApplicationController
   def service_params
     params.require(:item).permit(
       [
-        :item,
+        :type,
         :user_id,
         :title,
         :description,

@@ -25,7 +25,7 @@ class Api::V1::ItemsController < ApplicationController
 
   def update 
       @item = Item.find(params[:id])
-      @item.update(course_params)
+      @item.update(item_params)
       render json: @item
   end
 
@@ -45,6 +45,7 @@ class Api::V1::ItemsController < ApplicationController
         params.require(:item).permit(
           [
             :item,
+            :type,
             :user_id,
             :title,
             :description,
