@@ -13,6 +13,9 @@ class Api::V1::ServicesController < ApplicationController
 
   def create
     @service = service.new(service_params)
+    if !@service[:type]
+      @service[:type]="Task"
+    end
     if @service.valid?
         @service.save
         Cloudinary::Uploader.upload(service_params[:image])

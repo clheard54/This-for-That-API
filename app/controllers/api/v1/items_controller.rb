@@ -13,6 +13,9 @@ class Api::V1::ItemsController < ApplicationController
 
   def create
       @item = Item.new(item_params)
+      if !@item[:type]
+        @item[:type]="Item"
+      end
       if @item.valid?
           @item.save
           Cloudinary::Uploader.upload(item_params[:image])
