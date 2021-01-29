@@ -44,7 +44,7 @@ gem 'active_model_serializers'
 
 gem 'jwt', '~> 1.5', '>= 1.5.4'
 
-gem 'paperclip', '~> 5.1.0'
+gem 'paperclip', '~> 5.2.0'
 
 gem 'carrierwave'
 gem 'cloudinary'
